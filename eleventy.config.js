@@ -22,7 +22,7 @@ export default function (eleventyConfig) {
       year: "numeric",
       month: "long",
       day: "numeric",
-      timeZone: "UTC",
+      timeZone: "America/Los_Angeles",
     });
   });
 
@@ -33,13 +33,13 @@ export default function (eleventyConfig) {
       year: "numeric",
       month: "long",
       day: "numeric",
-      timeZone: "UTC",
+      timeZone: "America/Los_Angeles",
     });
     const time = date.toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "2-digit",
       hour12: true,
-      timeZone: "UTC",
+      timeZone: "America/Los_Angeles",
     });
     return `${day} at ${time}`;
   });
