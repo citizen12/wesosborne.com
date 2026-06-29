@@ -1,0 +1,18 @@
+# Build output
+_site/
+
+# Dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+*.log
+
+# Eleventy cache
+.cache/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,10 @@
+{
+  "title": "Wes Osborne",
+  "description": "Personal blog of Wes Osborne.",
+  "url": "https://wesosborne.com",
+  "author": {
+    "name": "Wes Osborne",
+    "email": "josborne@gmail.com"
+  },
+  "buildYear": 2026
+}

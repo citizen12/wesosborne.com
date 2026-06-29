@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wesosborne.com/sitemap.xml
