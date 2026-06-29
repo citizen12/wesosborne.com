@@ -1,6 +1,6 @@
 ---
 title: Notes from a Bifurcated Mind
-date: 2026-06-29
+date: "2025-06-27T19:48:00"
 description: On a double major in code and creative writing, and the strange convergence of symbols and syllables.
 ---
 

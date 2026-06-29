@@ -26,6 +26,24 @@ export default function (eleventyConfig) {
     });
   });
 
+  // Date + time, e.g. "June 27, 2025 at 7:48 PM" (UTC wall-clock).
+  eleventyConfig.addFilter("readableDateTime", (value) => {
+    const date = value instanceof Date ? value : new Date(value);
+    const day = date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC",
+    });
+    const time = date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: "UTC",
+    });
+    return `${day} at ${time}`;
+  });
+
   // ISO date for <time datetime="..."> and the feed.
   eleventyConfig.addFilter("isoDate", (value) => {
     const date = value instanceof Date ? value : new Date(value);
