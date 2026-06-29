@@ -1,6 +1,13 @@
-import { feedPlugin } from "@11ty/eleventy-plugin-rss";
+import { HtmlBasePlugin } from "@11ty/eleventy";
 
 export default function (eleventyConfig) {
+  // Rewrite root-relative URLs in HTML output to respect `pathPrefix`
+  // (so the site works under a subpath like /wesosborne.com/ on GitHub Pages).
+  // Registered exactly once — the eleventy-plugin-rss convenience feed plugin
+  // adds this internally too, which double-applied the prefix, so the Atom feed
+  // is hand-written below instead.
+  eleventyConfig.addPlugin(HtmlBasePlugin);
+
   // Copy static assets straight through to the output.
   eleventyConfig.addPassthroughCopy({ "src/css": "css" });
   eleventyConfig.addPassthroughCopy({ "src/static": "." });
@@ -30,26 +37,10 @@ export default function (eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/posts/*.md").reverse();
   });
 
-  // RSS/Atom feed.
-  eleventyConfig.addPlugin(feedPlugin, {
-    type: "atom",
-    outputPath: "/feed.xml",
-    collection: {
-      name: "posts",
-      limit: 20,
-    },
-    metadata: {
-      language: "en",
-      title: "Wes Osborne",
-      subtitle: "Personal blog of Wes Osborne.",
-      base: "https://wesosborne.com/",
-      author: {
-        name: "Wes Osborne",
-      },
-    },
-  });
-
   return {
+    // Serve under a subpath on GitHub Pages project sites (e.g. /wesosborne.com/).
+    // Defaults to "/" for local dev and custom-domain (root) deploys.
+    pathPrefix: process.env.PATH_PREFIX || "/",
     dir: {
       input: "src",
       includes: "_includes",

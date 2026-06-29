@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, claude/static-blog-setup-2un3lf]
   workflow_dispatch:
 
 permissions:
@@ -24,8 +24,17 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      - name: Configure GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - run: npm ci
+      # Build under the project-page subpath so assets/links resolve.
+      # actions/configure-pages exposes the correct base path automatically.
       - run: npm run build
+        env:
+          PATH_PREFIX: ${{ steps.pages.outputs.base_path }}/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
